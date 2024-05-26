@@ -1,6 +1,6 @@
 package BinaryTrees;
 
-public class HCSDOfBT {
+public class OperationsOfBT {
 
     static class Node{
         int data;
@@ -79,6 +79,42 @@ public class HCSDOfBT {
         return new Info(diam, ht);
     }
 
+
+
+    // checking sub tree:
+
+    public static boolean isIdentical(Node node, Node subRoot){
+        if(node == null && subRoot == null){
+            return true;
+        }
+        else if(node == null || subRoot == null || node.data != subRoot.data){
+            return false;
+        }
+
+        if(!isIdentical(node.left, subRoot.left)){
+            return false;
+        }
+        if(!isIdentical(node.right, subRoot.right)){
+            return false;
+        }
+
+        return true;
+    }
+
+
+    public static boolean isSubTree(Node root, Node subRoot){
+        if(root == null){
+            return false;
+        }
+        if(root.data == subRoot.data){
+            if(isIdentical(root, subRoot)){
+                return true;
+            }
+        }
+
+        return isSubTree(root.left, subRoot) || isSubTree(root.right, subRoot);
+    }
+
     public static void main(String[] args) {
         /* 
          *                 1
@@ -103,5 +139,17 @@ public class HCSDOfBT {
         System.out.println("Diameter approach 1 of the tree is: "+diameter2(root));
 
         System.out.println("Diameter approach 2 of the Tree is: "+ diameter(root).diam);
+
+        /* 
+         *               2 
+         *              / \ 
+         *             4   5 
+         */
+
+         Node subRoot = new Node(2);
+         subRoot.left = new Node(4);
+         subRoot.right = new Node(5);
+
+         System.out.println(isSubTree(root, subRoot));
     }
 }
