@@ -73,6 +73,8 @@ public class Heap {
     
     public static void main(String[] args) {
         // heap -> implements priority queue
+        // Min heap 
+        // by changing the sign on above > and < and change minIdx to maxInd we get max heap
         
         HeapClass h = new HeapClass();
         h.add(3);
@@ -80,7 +82,7 @@ public class Heap {
         h.add(1);
         h.add(5);
 
-        while(!h.isEmpty()){
+        while(!h.isEmpty()){ // heapsort
             System.out.println(h.peek());
             h.remove();
         }
